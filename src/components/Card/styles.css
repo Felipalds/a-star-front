@@ -1,0 +1,26 @@
+.pokeCardChoice {
+    border: 1px solid white;
+    padding: 20px;
+    width: 200px;
+    border-radius: 5%;
+}
+
+button .pokeCardChoice:hover {
+    background-color: beige;
+    transition: .5s;
+    color: black;
+}
+
+button .pokeCardChoice:disabled {
+    color: grey;
+}
+
+button .pokeCardChoice:disabled:hover {
+    color: grey;
+    background-color: #242424;
+}
+
+
+
+
+
