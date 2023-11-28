@@ -47,6 +47,7 @@ function App() {
                 setPokemon={setUserPokemon} 
                 step={step} 
                 setStep={setStep}
+                userPokemon={null}
               />
           ))}
         </div>
@@ -66,7 +67,9 @@ function App() {
                 pokemon={poke} 
                 setPokemon={setIaPokemon} 
                 step={step} 
-                setStep={setStep}/>
+                setStep={setStep}
+                userPokemon={userPokemon}
+              />
           ))}
         </div>
       </div>

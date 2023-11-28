@@ -1,6 +1,7 @@
 import React from "react"
 import { GameContext } from "../../context/GameContext"
 import Pokemon from "../Pokemon/Pokemon"
+import './styles.css'
 
 export function PlayingBlock () {
 
@@ -8,15 +9,11 @@ export function PlayingBlock () {
 
     return (<div className="playingBlock">
         <div>
-          <p>Round {round}</p>
+          <p className='round'>Round {round}</p>
           <button onClick={handleStopPlaying}>Reset</button>
         </div>
-        
-        <div className='enemyPokemonPlayingBlock'>
-          <div className='withImageEnemy'></div>
-          <img className='enemy' src={iaPokemon.sprites[0]} style={{width: "250px"}}/>
-        </div>
-        
+
+        <img className='enemy' src={iaPokemon.sprites[0]}/>
         <Pokemon />
       </div> 
     )

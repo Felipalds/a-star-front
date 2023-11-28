@@ -1,46 +1,61 @@
-
 .statusBlock { 
     display: flex;
+    width: 90%;
+    bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    justify-content: space-between;
+    background-color: antiquewhite;
+    border: 4px solid #242424;
+    border-radius: 15px;
     align-items:center;
-    justify-content: space-around;
-    padding: 0;
-    background-color: antiquewhite;
     color: black;
-    width: 100%;
-    margin: 0;
     position: fixed;
-    bottom: 0;
-  }
-  
-  .powers {
-    display: grid;
-    grid-template-columns: 100px 100px;
-    margin-left: 10px;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .power {
-    background-color: antiquewhite;
-    color: black;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .power:hover {
-    color: aliceblue;
-    background-color: #242424;
-    border: 1px solid white;
-    transition: .5s;
-    cursor: pointer;
-  }
+}
 
-  .userPokemonDiv {
-    width: 400px;
-  }
+body:hover {
+  border: 10px solid red;
+  transition: .5s;
+}
 
-  .imageUser {
-    display: flex;
-  }
+.powers {
+  display: grid;
+  grid-template-columns: 1 1;
+  grid-template-rows: 1 1;
+  margin-left: 70px;
+  align-items: center;
+  text-align: center;
+}
+  
+.power {
+  border: 1px solid black;
+  width: 100px;
+  height: 50px;
+  align-items: center;
+  text-align: center;
+  color: black;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.power:hover {
+  color: aliceblue;
+  background-color: #242424;
+  border: 1px solid white;
+  transition: .5s;
+  cursor: pointer;
+}
+
+
+.imageUser {
+  position: fixed;
+  width: 500px;
+  bottom: 50px;
+  left: 0;
+}
+
+.userStatus {
+  display: flex;
+  justify-content: space-around;
+}
   
