@@ -1,17 +1,13 @@
 export interface IPokemon {
     name: string,
+    health: number,
     type: string,
-    images: Images,
-    powers: Power[],
+    sprites: string[],
+    moves: Move[],
     isSelected: boolean
-    life: number
 }
 
-interface Images {
-    front: string
-    back: string
-}
-
-interface Power {
+interface Move {
     name: string
+    power: number
 }

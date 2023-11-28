@@ -1,10 +1,10 @@
 import React from 'react'
 import './App.css'
 import { IPokemon } from './interfaces/IPokemon'
-import { possiblePokemons } from './possiblePokemons'
 import PokemonCard from './components/Card/PokemonCard'
-import Pokemon from './components/Pokemon/Pokemon'
 import { getLoad } from './services/round.service'
+import { GameContext } from './context/GameContext'
+import { PlayingBlock } from './components/PlayingBlock/PlayingBlock'
 
 function App() {
 
@@ -29,22 +29,19 @@ function App() {
     setUserPokemon(null)
     setIaPokemon(null)
     setRound(0)
-    possiblePokemons.map(poke => {
-      poke.isSelected = false
-    })
   }
 
  
 
   if(step == 0) {
-    return (
+    if(pokemons) return (
       <div className="game">
         <div>
           <h1>Choose your Pokémon</h1>
           <h2>By: Luiz and Zoz</h2>
         </div>
-        <div className='pokemonChoiceBlock'>
-          {possiblePokemons.map(poke => (
+        <div className='cards'>
+          {pokemons.map(poke => (
               <PokemonCard 
                 pokemon={poke} 
                 setPokemon={setUserPokemon} 
@@ -57,14 +54,14 @@ function App() {
     )
   }
   if(step == 1) {
-    return (
+    if(pokemons) return (
       <div className="game">
         <div>
           <h1>Choose AI Pokémon</h1>
           <h2>By: Luiz and Zoz</h2>
         </div>
-        <div className='pokemonChoiceBlock'>
-          {possiblePokemons.map(poke => (
+        <div className='cards'>
+          {pokemons.map(poke => (
               <PokemonCard
                 pokemon={poke} 
                 setPokemon={setIaPokemon} 
@@ -75,25 +72,15 @@ function App() {
       </div>
     )
   }
+
   if(step == 2) {
+
     if(iaPokemon && userPokemon) return (
-      <div className="playingBlock">
-        <div>
-          <p>Round {round}</p>
-          <button onClick={handleStopPlaying}>Reset</button>
-        </div>
-        
-        <div className='enemyPokemonPlayingBlock'>
-          <img className='enemy' src={iaPokemon?.images.front} style={{width: "250px"}}/>
-        </div>
-        
-        <Pokemon 
-          userPokemon={userPokemon}
-          round={round}
-          setRound={setRound}
-        />
-      </div>
-    )
+      <GameContext.Provider 
+      value={{round, setRound, userPokemon, setUserPokemon, iaPokemon, setIaPokemon, handleStopPlaying}}>
+        <PlayingBlock />
+      </GameContext.Provider>
+      )
   }
 }
 

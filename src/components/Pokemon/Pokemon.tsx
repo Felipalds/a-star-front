@@ -1,15 +1,13 @@
-import React, { Dispatch, SetStateAction } from 'react'
-import { IPokemon } from '../../interfaces/IPokemon'
+import React from 'react'
 import './styles.css'
 import { postHability } from '../../services/round.service'
+import { GameContext } from '../../context/GameContext'
 
-interface IPokemonProps {
-    userPokemon: IPokemon
-    round: number
-    setRound: Dispatch<SetStateAction<number>>
-}
 
-const Pokemon = ({userPokemon, round, setRound}:IPokemonProps) => {
+
+const Pokemon = () => {
+
+  const { userPokemon, round, setRound } = React.useContext(GameContext)
 
   async function handlePower(power: string) {
     setRound(round+1)
@@ -18,14 +16,17 @@ const Pokemon = ({userPokemon, round, setRound}:IPokemonProps) => {
 
   return (
     <>
-    <img src={userPokemon.images.back} style={{width: "500px"}}/>
+    <div className='imageUser'>
+      <img src={userPokemon.sprites[1]} style={{width: "500px"}}/>
+      <div className='userPokemonDiv'></div>
+    </div>
     <div className="statusBlock">
         <div>
             <h3>{userPokemon.name}</h3>
-            <p>Vida: {userPokemon.life}</p>
+            <p>Vida: {userPokemon.health}</p>
         </div>
         <div className="powers">
-            {userPokemon?.powers.map(p => (<h3 className='power' onClick={() => handlePower(p.name)}>{p.name}</h3>))}
+            {userPokemon.moves.map(p => (<h3 className='power' onClick={() => handlePower(p.name)}>{p.name}</h3>))}
         </div>
     </div>
     </>

@@ -55,10 +55,17 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.pokemonChoiceBlock {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+.game {
+  align-items: center;
+  margin: 0 auto;
+}
+
+.cards {
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+  gap: 20px;
+  max-width: 1000px;
 }
 
 .playingBlock {
@@ -71,9 +78,14 @@ button:focus-visible {
 }
 
 .enemyPokemonPlayingBlock { 
+  margin-top: 100px;
   display: flex;
-  flex-direction: row-reverse;
 }
+
+.withImageEnemy {
+  width: 600px;
+}
+
 
 img .enemy {
   position: fixed;

@@ -35,4 +35,12 @@
     transition: .5s;
     cursor: pointer;
   }
+
+  .userPokemonDiv {
+    width: 400px;
+  }
+
+  .imageUser {
+    display: flex;
+  }
   
