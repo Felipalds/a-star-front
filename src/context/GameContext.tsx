@@ -5,10 +5,12 @@ interface IGameContext {
     round: number
     setRound: Dispatch<SetStateAction<number>>
     handleStopPlaying: () => void
-    iaPokemon: IPokemon 
-    setIaPokemon: Dispatch<SetStateAction<IPokemon  | null>>
+    aiPokemon: IPokemon 
+    setAiPokemon: Dispatch<SetStateAction<IPokemon  | null>>
     userPokemon: IPokemon
     setUserPokemon: Dispatch<SetStateAction<IPokemon  | null>>
+    battleLogs: string[]
+    setBattleLogs: Dispatch<SetStateAction<string[]>>
 }
 
 export const GameContext = React.createContext<IGameContext>({} as IGameContext)

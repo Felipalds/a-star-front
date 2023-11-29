@@ -10,9 +10,10 @@ function App() {
 
   const [pokemons, setPokemons] = React.useState<IPokemon[] | null>(null)
   const [userPokemon, setUserPokemon] = React.useState<IPokemon | null>(null)
-  const [iaPokemon, setIaPokemon] = React.useState<IPokemon | null>(null)
+  const [aiPokemon, setAiPokemon] = React.useState<IPokemon | null>(null)
   const [step, setStep] = React.useState(0)
   const [round, setRound] = React.useState(0)
+  const [battleLogs, setBattleLogs] = React.useState<string[]>(["Battle start", "Now"])
 
   React.useEffect(() => {
     async function loadPokemons() {
@@ -27,7 +28,7 @@ function App() {
     setStep(0)
     setUserPokemon(null)
     setUserPokemon(null)
-    setIaPokemon(null)
+    setAiPokemon(null)
     setRound(0)
   }
 
@@ -44,7 +45,8 @@ function App() {
           {pokemons.map(poke => (
               <PokemonCard 
                 pokemon={poke} 
-                setPokemon={setUserPokemon} 
+                setUserPokemon={setUserPokemon} 
+                setAiPokemon={setAiPokemon}
                 step={step} 
                 setStep={setStep}
                 userPokemon={null}
@@ -65,7 +67,8 @@ function App() {
           {pokemons.map(poke => (
               <PokemonCard
                 pokemon={poke} 
-                setPokemon={setIaPokemon} 
+                setUserPokemon={setUserPokemon} 
+                setAiPokemon={setAiPokemon}
                 step={step} 
                 setStep={setStep}
                 userPokemon={userPokemon}
@@ -78,9 +81,9 @@ function App() {
 
   if(step == 2) {
 
-    if(iaPokemon && userPokemon) return (
+    if(aiPokemon && userPokemon) return (
       <GameContext.Provider 
-      value={{round, setRound, userPokemon, setUserPokemon, iaPokemon, setIaPokemon, handleStopPlaying}}>
+      value={{round, setRound, userPokemon, setUserPokemon, aiPokemon, setAiPokemon, handleStopPlaying, battleLogs, setBattleLogs}}>
         <PlayingBlock />
       </GameContext.Provider>
       )

@@ -13,10 +13,10 @@
     position: fixed;
 }
 
-body:hover {
+/* body:hover {
   border: 10px solid red;
   transition: .5s;
-}
+} */
 
 .powers {
   display: grid;

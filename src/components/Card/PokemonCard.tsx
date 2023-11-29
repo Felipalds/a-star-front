@@ -1,24 +1,29 @@
 import React, { Dispatch, SetStateAction } from "react"
 import './styles.css'
-import { IPokemon } from "../../interfaces/IPokemon"
+import { IPokemon, IStartResponse } from "../../interfaces/IPokemon"
 import { postStart } from "../../services/round.service"
 
 interface PokemonChoiceProps {
     pokemon: IPokemon
-    setPokemon: Dispatch<SetStateAction<IPokemon | null>>
+    setUserPokemon: Dispatch<SetStateAction<IPokemon | null>>
+    setAiPokemon: Dispatch<SetStateAction<IPokemon | null>>
     setStep: Dispatch<SetStateAction<number>>
     step: number
     userPokemon: IPokemon | null
 }
 
-export default function PokemonCard ({pokemon, setPokemon, step, setStep, userPokemon}: PokemonChoiceProps) {
+export default function PokemonCard ({pokemon, setAiPokemon, setUserPokemon, step, setStep, userPokemon}: PokemonChoiceProps) {
 
     async function handleClick() {
-        setPokemon(pokemon)
-
+        if(step === 0) {
+            setUserPokemon(pokemon)
+        }
         if(step === 1) {
-            const res = await postStart({userPokemon: userPokemon?.name.toLowerCase(), aiPokemon: pokemon.name.toLowerCase() })
-            console.log('aaaaaaaaaa', res)
+            const res: IStartResponse = await postStart({userPokemon: userPokemon?.name.toLowerCase(), aiPokemon: pokemon.name.toLowerCase() })
+            pokemon.status = res.aiPokemon
+            userPokemon!.status = res.userPokemon
+            setAiPokemon(pokemon)
+            setUserPokemon(userPokemon)
         }
 
         setStep(step + 1)

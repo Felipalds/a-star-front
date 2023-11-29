@@ -1,7 +1,7 @@
 import axios from "axios"
 import { IPokemon } from "../interfaces/IPokemon"
 
-const BASE_URL = "http://localhost:8080"
+const BASE_URL = "http://10.81.74.167:8080"
 
 interface IRequestPokemon {
     data: {
@@ -10,6 +10,9 @@ interface IRequestPokemon {
 }
 
 interface IPostHabilityData {
+    userPokemon: IPokemon | undefined
+    aiPokemon: IPokemon | undefined
+    userMove: number
 }
 
 interface IPostStart {
@@ -23,13 +26,10 @@ export async function getLoad () {
 }
 
 export async function postStart ({userPokemon, aiPokemon}: IPostStart) {
-    const body = {userPokemon, aiPokemon}
-    console.log(body)
-    const { data } = await axios.post(`${BASE_URL}/start`, {userPokemon, aiPokemon})
-    console.log(data)
+    return  (await axios.post(`${BASE_URL}/start`, {userPokemon, aiPokemon})).data
 }
 
-export async function postHability (data: IPostHabilityData) {
-    axios.post(`${BASE_URL}/round`, {...data})
+export async function postHability (habilityData: IPostHabilityData) {
+    return (await axios.post(`${BASE_URL}/round`, {...habilityData})).data
 }
 
