@@ -21,6 +21,7 @@ interface IGameContext {
     setPokemonModal: Dispatch<SetStateAction<IStatus | null>>
     endBattle: boolean
     setEndBattle: Dispatch<SetStateAction<boolean>>
+    algorithm : string
 }
 
 export const GameContext = React.createContext<IGameContext>({} as IGameContext)

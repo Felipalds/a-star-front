@@ -3,16 +3,15 @@
     display: grid;
     grid-template-columns: 100px 100px;
     grid-template-rows: 100px 100px;
-
     justify-content: space-around;
-    margin-left: 70px;
     align-items: center;
     text-align: center;
+    gap: 30px;
 }
 
     
 .move {
-    width: 80px;
+    width: 80%;
     height: 30px;
     border: 1px solid black;
     padding: 20px;

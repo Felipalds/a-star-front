@@ -13,12 +13,14 @@ function App() {
   const [aiPokemon, setAiPokemon] = React.useState<IPokemon | null>(null)
   const [userStatus, setUserStatus] = React.useState<IStatus | null>(null)
   const [aiStatus, setAiStatus] = React.useState<IStatus | null>(null)
-  const [step, setStep] = React.useState(0)
+  const [step, setStep] = React.useState("userChoice")
   const [round, setRound] = React.useState(0)
   const [battleLogs, setBattleLogs] = React.useState<string[]>(["Battle start"])
   const [showModal, setShowModal] = React.useState(false)
   const [pokemonModal, setPokemonModal] = React.useState<IStatus | null>({} as IStatus)
   const [endBattle, setEndBattle] = React.useState<boolean>(false)
+  const [algorithm, setAlgorithm] = React.useState<string>("astar")
+
 
   React.useEffect(() => {
     async function loadPokemons() {
@@ -31,7 +33,7 @@ function App() {
   })
 
   function handleStopPlaying () {
-    setStep(0)
+    setStep("userChoice")
     setUserPokemon(null)
     setUserPokemon(null)
     setAiPokemon(null)
@@ -41,9 +43,14 @@ function App() {
     setEndBattle(false)
   }
 
+  function handleAlgorithm (alg: string) {
+    setAlgorithm(alg)
+    setStep("game")
+  }
+
  
 
-  if(step == 0) {
+  if(step == "userChoice") {
     if(pokemons) return (
       <div className="game">
         <div>
@@ -67,7 +74,7 @@ function App() {
       </div>
     )
   }
-  if(step == 1) {
+  if(step == "aiChoice") {
     if(pokemons) return (
       <div className="game">
         <div>
@@ -92,7 +99,17 @@ function App() {
     )
   }
 
-  if(step == 2) {
+  if(step === "algorithmChoice") {
+    return(
+      <>
+        <h1>Hey zoz I ate your mother</h1>
+        <button onClick={() => handleAlgorithm("A_STAR")}>A STAR</button>
+        <button onClick={() => handleAlgorithm("BFS")}>BFS</button>
+      </>
+    )
+  }
+
+  if(step === "game") {
 
     if(aiPokemon && userPokemon) return (
       <GameContext.Provider 
@@ -115,7 +132,8 @@ function App() {
         pokemonModal,
         setPokemonModal,
         endBattle,
-        setEndBattle
+        setEndBattle,
+        algorithm
         }}>
         <PlayingBlock />
       </GameContext.Provider>

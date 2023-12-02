@@ -1,16 +1,18 @@
 .statusBlock { 
     display: flex;
-    width: 90%;
     bottom: 10px;
-    padding-left: 50px;
-    padding-right: 50px;
-    justify-content: space-between;
+    width: 100%;
     background-color: antiquewhite;
     border: 4px solid #242424;
     border-radius: 15px;
     align-items:center;
     color: black;
     position: fixed;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 
@@ -21,8 +23,7 @@
   left: 0;
 }
 
-.userStatus {
-  display: flex;
-  justify-content: space-around;
+.logs {
+  margin-left:100px;
+  max-width: 500px;
 }
-  

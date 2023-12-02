@@ -23,7 +23,8 @@ const Pokemon = () => {
     setBattleLogs,
     setShowModal,
     setPokemonModal,
-    setEndBattle
+    setEndBattle,
+    algorithm
   } = React.useContext(GameContext)
 
   async function handleMove(move: number) {
@@ -34,7 +35,8 @@ const Pokemon = () => {
       aiPokemon,
       userMove: move,
       userStatus,
-      aiStatus
+      aiStatus,
+      algorithm
     }
 
     const data: IResponseHability = await postHability(powerData)
@@ -53,33 +55,27 @@ const Pokemon = () => {
   }
 
   return (
-    <>
-    <img src={userPokemon.imageBack} className='imageUser'/>
-    <div className="statusBlock statusBlockStyle">
-
-        
-
-        {battleLogs.map(bl => {
-          return <><p>{bl}</p><br /></>
-        })}
-
-        
+    <div className="statusBlock">
         <div className="userStatus">
-          <div>
-              <h3>{userPokemon.name}</h3>
-              <p>Vida: {userStatus?.health}</p>
-              <button onClick={() => exibStatus("user")}>Ver Status</button>
-          </div>
-         <Moves userPokemon={userPokemon} handleMove={handleMove}/>
+          <p>{userPokemon.name}</p>
+          <p>Vida: {userStatus?.health?.toFixed(1)}</p>
+          <button onClick={() => exibStatus("user")}>Ver Status</button>
+        </div>
+
+        <Moves userPokemon={userPokemon} handleMove={handleMove}/>
+
+        <div className='logs'>
+          {battleLogs.map(bl => {
+            return <><p>{bl}</p></>
+          })}
         </div>
 
         <div style={{color: "red"}}>
-          <h3>Enemy {aiPokemon.name}</h3>
-          <p>Vida: {aiStatus?.health}</p>
+          <p>{aiPokemon.name}</p>
+          <p>Vida: {aiStatus?.health?.toFixed(1)}</p>
           <button onClick={() => exibStatus("ai")}>Ver Status</button>
         </div>
-    </div>
-    </>
+      </div>
   )
 }
 

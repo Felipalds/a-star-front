@@ -9,26 +9,25 @@ interface PokemonChoiceProps {
     setAiStatus: Dispatch<SetStateAction<IStatus | null>>
     setUserPokemon: Dispatch<SetStateAction<IPokemon | null>>
     setAiPokemon: Dispatch<SetStateAction<IPokemon | null>>
-    setStep: Dispatch<SetStateAction<number>>
-    step: number
+    setStep: Dispatch<SetStateAction<string>>
+    step: string
     userPokemon: IPokemon | null
 }
 
 export default function PokemonCard ({pokemon, setUserStatus, setAiStatus, setAiPokemon, setUserPokemon, step, setStep, userPokemon}: PokemonChoiceProps) {
 
     async function handleClick() {
-        if(step === 0) {
+        if(step === "userChoice") {
             setUserPokemon(pokemon)
+            setStep("aiChoice")
         }
-        if(step === 1) {
+        if(step === "aiChoice") {
             const res: IStartResponse = await postStart({userPokemon, aiPokemon: pokemon })
             setUserStatus(res.userStatus)
             setAiStatus(res.aiStatus)
             setAiPokemon(pokemon)
+            setStep("algorithmChoice")
         }
-
-        setStep(step + 1)
-        
     }
     return(
         <button className={"pokeCardChoice"} onClick={handleClick}>
