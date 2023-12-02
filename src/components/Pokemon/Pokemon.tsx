@@ -3,60 +3,80 @@ import './styles.css'
 import { postHability } from '../../services/round.service'
 import { GameContext } from '../../context/GameContext'
 import { IResponseHability } from '../../interfaces/IPokemon'
+import { Moves } from '../Moves'
 
 
 const Pokemon = () => {
 
-  const { userPokemon, aiPokemon, round, setRound, setUserPokemon, setAiPokemon, battleLogs, setBattleLogs } = React.useContext(GameContext)
+  const { 
+    userPokemon, 
+    aiPokemon, 
+    userStatus, 
+    setUserStatus, 
+    aiStatus, 
+    setAiStatus, 
+    round, 
+    setRound, 
+    setUserPokemon, 
+    setAiPokemon, 
+    battleLogs, 
+    setBattleLogs,
+    setShowModal,
+    setPokemonModal,
+    setEndBattle
+  } = React.useContext(GameContext)
 
-  async function handlePower(move: number) {
+  async function handleMove(move: number) {
     setRound(round+1)
 
     const powerData = {
       userPokemon,
       aiPokemon,
-      userMove: move
+      userMove: move,
+      userStatus,
+      aiStatus
     }
-
-    console.log(powerData)
 
     const data: IResponseHability = await postHability(powerData)
     
-    userPokemon.status = data.statusUser
-    aiPokemon.status = data.statusAi
+    setUserStatus(data.userStatus)
+    setAiStatus(data.aiStatus)
     setUserPokemon(userPokemon)
     setAiPokemon(aiPokemon)
-    setBattleLogs([...data.logsUser, ...data.logsAi])
+    setBattleLogs([...data.logs])
+    if(data.ended === true) setEndBattle(true)
+  }
+
+  const exibStatus = (whichShow: string) => {
+    whichShow === "user" ? setPokemonModal(userStatus) : setPokemonModal(aiStatus)
+    setShowModal(true)
   }
 
   return (
     <>
-    <img src={userPokemon.sprites[1]} className='imageUser'/>
+    <img src={userPokemon.imageBack} className='imageUser'/>
     <div className="statusBlock statusBlockStyle">
 
         <div style={{color: "red"}}>
           <h3>Enemy {aiPokemon.name}</h3>
-          <p>Vida: {aiPokemon.status?.health}</p>
+          <p>Vida: {aiStatus?.health}</p>
+          <button onClick={() => exibStatus("ai")}>Ver Status</button>
         </div>
 
-        <p> {battleLogs[0] + battleLogs[1]} </p>
+        {battleLogs.map(bl => {
+          return <><p>{bl}</p><br /></>
+        })}
 
         
         <div className="userStatus">
           <div>
               <h3>{userPokemon.name}</h3>
-              <h4>Qual será sua jogada?</h4>
-              <p>Vida: {userPokemon.status?.health}</p>
+              <p>Vida: {userStatus?.health}</p>
+              <button onClick={() => exibStatus("user")}>Ver Status</button>
           </div>
 
 
-          <div className="powers ">
-              {userPokemon.moves.map((p, n) => (
-                <h4 className='power' onClick={() => handlePower(n)}>
-                  {p.name} {p.power}
-                </h4>
-              ))}
-          </div>
+         <Moves userPokemon={userPokemon} handleMove={handleMove}/>
         </div>
     </div>
     </>

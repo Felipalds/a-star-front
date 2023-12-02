@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { IPokemon } from "../interfaces/IPokemon"
+import { IPokemon, IStatus } from "../interfaces/IPokemon"
 
 interface IGameContext {
     round: number
@@ -9,8 +9,18 @@ interface IGameContext {
     setAiPokemon: Dispatch<SetStateAction<IPokemon  | null>>
     userPokemon: IPokemon
     setUserPokemon: Dispatch<SetStateAction<IPokemon  | null>>
+    userStatus: IStatus | null
+    setUserStatus: Dispatch<SetStateAction<IStatus | null>>
+    aiStatus: IStatus | null
+    setAiStatus: Dispatch<SetStateAction<IStatus | null>>
     battleLogs: string[]
     setBattleLogs: Dispatch<SetStateAction<string[]>>
+    showModal: boolean
+    setShowModal: Dispatch<SetStateAction<boolean>>
+    pokemonModal: IStatus | null
+    setPokemonModal: Dispatch<SetStateAction<IStatus | null>>
+    endBattle: boolean
+    setEndBattle: Dispatch<SetStateAction<boolean>>
 }
 
 export const GameContext = React.createContext<IGameContext>({} as IGameContext)

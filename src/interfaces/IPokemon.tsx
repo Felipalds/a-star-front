@@ -1,46 +1,78 @@
+
+export interface IRequestPokemon {
+    data: {
+        pokemons: IPokemon[]
+    }
+}
+
+export interface IPostHabilityData {
+    userPokemon: IPokemon | undefined
+    aiPokemon: IPokemon | undefined
+    userStatus: IStatus | null
+    aiStatus: IStatus | null
+    userMove: number
+}
+
+export interface IPostStart {
+    userPokemon: IPokemon | null,
+    aiPokemon: IPokemon | null
+}
+
 export interface IPokemon {
     name: string,
     type: string,
-    secondType: string
-    sprites: string[],
+    secondType?: string
+    imageFront: string,
+    imageBack: string,
+    health: number,
+    attack: number,
+    specialAttack: number,
+    defense: number,
+    specialDefense: number,
+    speed: number
     moves: Move[],
-    status ?: IStatus
 }
 
-interface Move {
+export interface Move {
     name: string
     power: number
+    description: string
+    priority: number
+    damageType: string
+    pokeType: string
 }
 
 export interface IStartResponse {
-    userPokemon: IStatus
-    aiPokemon: IStatus
+    userStatus: IStatus
+    aiStatus: IStatus
+
 }
 
 
 export interface IStatus {
-    health: number
-    speed: number
-    attack: number
-    specialAttack: number
-    specialDefense: number
-    name: string
-    pokeType: string
-    secondPokeType: string
-    speedStage: number
-    attackStage: number
-    spAttackStage: number
-    defenseStage: number
-    spDefenseStage: number
-    fainted: boolean
+    health?: number
+    speed?: number
+    attack?: number
+    specialAttack?: number
+    specialDefense?: number
+    name?: string
+    pokeType?: string
+    secondPokeType?: string
+    speedStage?: number
+    attackStage?: number
+    defense?: number
+    spAttackStage?: number
+    defenseStage?: number
+    spDefenseStage?: number
+    fainted?: boolean
 }
 
 export interface IResponseHability {
-  statusUser: IStatus
-  statusAi: IStatus
+  userStatus: IStatus
+  aiStatus: IStatus
   turn: number
   ended: boolean
-  logsUser: string[]
-  logsAi: string[]
+  logs: string
   first: string
 }
+

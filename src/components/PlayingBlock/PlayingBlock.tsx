@@ -2,18 +2,21 @@ import React from "react"
 import { GameContext } from "../../context/GameContext"
 import Pokemon from "../Pokemon/Pokemon"
 import './styles.css'
+import { StatusModal } from "../StatusModal/StatusModal"
+import { EndModal } from "../EndModal/EndModal"
 
 export function PlayingBlock () {
 
-    const {round, handleStopPlaying, aiPokemon } = React.useContext(GameContext)
+    const {round, handleStopPlaying, aiPokemon, setShowModal, showModal, pokemonModal, endBattle, setEndBattle } = React.useContext(GameContext)
 
     return (<div className="playingBlock">
         <div>
           <p className='round'>Round {round}</p>
           <button onClick={handleStopPlaying}>Reset</button>
         </div>
-
-        <img className='enemy' src={aiPokemon.sprites[0]}/>
+        <StatusModal showModal={showModal} setShowModal={setShowModal} status={pokemonModal}/>
+        <EndModal endBattle={endBattle} setEndBattle={setEndBattle}/>
+        <img className='enemy' src={aiPokemon.imageFront}/>
         <Pokemon />
       </div> 
     )

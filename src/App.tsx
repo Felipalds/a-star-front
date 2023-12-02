@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { IPokemon } from './interfaces/IPokemon'
+import { IPokemon, IStatus } from './interfaces/IPokemon'
 import PokemonCard from './components/Card/PokemonCard'
 import { getLoad } from './services/round.service'
 import { GameContext } from './context/GameContext'
@@ -11,13 +11,19 @@ function App() {
   const [pokemons, setPokemons] = React.useState<IPokemon[] | null>(null)
   const [userPokemon, setUserPokemon] = React.useState<IPokemon | null>(null)
   const [aiPokemon, setAiPokemon] = React.useState<IPokemon | null>(null)
+  const [userStatus, setUserStatus] = React.useState<IStatus | null>(null)
+  const [aiStatus, setAiStatus] = React.useState<IStatus | null>(null)
   const [step, setStep] = React.useState(0)
   const [round, setRound] = React.useState(0)
-  const [battleLogs, setBattleLogs] = React.useState<string[]>(["Battle start", "Now"])
+  const [battleLogs, setBattleLogs] = React.useState<string[]>(["Battle start"])
+  const [showModal, setShowModal] = React.useState(false)
+  const [pokemonModal, setPokemonModal] = React.useState<IStatus | null>({} as IStatus)
+  const [endBattle, setEndBattle] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     async function loadPokemons() {
-      setPokemons(await getLoad())
+      const pokemons = await getLoad()
+      setPokemons(pokemons)
     }
     if(!pokemons) {
       loadPokemons()
@@ -30,6 +36,8 @@ function App() {
     setUserPokemon(null)
     setAiPokemon(null)
     setRound(0)
+    setBattleLogs(["Battle start"])
+    setShowModal(false)
   }
 
  
@@ -47,6 +55,8 @@ function App() {
                 pokemon={poke} 
                 setUserPokemon={setUserPokemon} 
                 setAiPokemon={setAiPokemon}
+                setUserStatus={setUserStatus}
+                setAiStatus={setAiStatus}
                 step={step} 
                 setStep={setStep}
                 userPokemon={null}
@@ -70,6 +80,8 @@ function App() {
                 setUserPokemon={setUserPokemon} 
                 setAiPokemon={setAiPokemon}
                 step={step} 
+                setUserStatus={setUserStatus}
+                setAiStatus={setAiStatus}
                 setStep={setStep}
                 userPokemon={userPokemon}
               />
@@ -83,7 +95,27 @@ function App() {
 
     if(aiPokemon && userPokemon) return (
       <GameContext.Provider 
-      value={{round, setRound, userPokemon, setUserPokemon, aiPokemon, setAiPokemon, handleStopPlaying, battleLogs, setBattleLogs}}>
+      value={{
+        round, 
+        setRound, 
+        userPokemon, 
+        setUserPokemon, 
+        aiPokemon, 
+        setAiPokemon, 
+        userStatus,
+        setUserStatus,
+        aiStatus,
+        setAiStatus,
+        handleStopPlaying, 
+        battleLogs, 
+        setBattleLogs,
+        showModal,
+        setShowModal,
+        pokemonModal,
+        setPokemonModal,
+        endBattle,
+        setEndBattle
+        }}>
         <PlayingBlock />
       </GameContext.Provider>
       )

@@ -1,0 +1,32 @@
+
+.moves {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 70px;
+    align-items: center;
+    text-align: center;
+}
+
+    
+.move {
+    border: 1px solid black;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    color: black;
+    margin: 0 auto;
+    border-radius: 5px;
+    font-size: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+  
+.move:hover {
+    color: aliceblue;
+    background-color: #242424;
+    border: 1px solid white;
+    transition: .5s;
+    cursor: pointer;
+}
