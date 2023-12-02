@@ -57,11 +57,7 @@ const Pokemon = () => {
     <img src={userPokemon.imageBack} className='imageUser'/>
     <div className="statusBlock statusBlockStyle">
 
-        <div style={{color: "red"}}>
-          <h3>Enemy {aiPokemon.name}</h3>
-          <p>Vida: {aiStatus?.health}</p>
-          <button onClick={() => exibStatus("ai")}>Ver Status</button>
-        </div>
+        
 
         {battleLogs.map(bl => {
           return <><p>{bl}</p><br /></>
@@ -74,9 +70,13 @@ const Pokemon = () => {
               <p>Vida: {userStatus?.health}</p>
               <button onClick={() => exibStatus("user")}>Ver Status</button>
           </div>
-
-
          <Moves userPokemon={userPokemon} handleMove={handleMove}/>
+        </div>
+
+        <div style={{color: "red"}}>
+          <h3>Enemy {aiPokemon.name}</h3>
+          <p>Vida: {aiStatus?.health}</p>
+          <button onClick={() => exibStatus("ai")}>Ver Status</button>
         </div>
     </div>
     </>

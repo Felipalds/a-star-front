@@ -1,7 +1,9 @@
 
 .moves {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-template-rows: 100px 100px;
+
     justify-content: space-around;
     margin-left: 70px;
     align-items: center;
@@ -10,6 +12,8 @@
 
     
 .move {
+    width: 80px;
+    height: 30px;
     border: 1px solid black;
     padding: 20px;
     align-items: center;

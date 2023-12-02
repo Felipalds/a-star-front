@@ -1,7 +1,7 @@
 import axios from "axios"
 import { IPostHabilityData, IPostStart, IRequestPokemon } from "../interfaces/IPokemon"
 
-const BASE_URL = "http://localhost:8080"
+const BASE_URL = "http://10.81.74.167:8080"
 
 export async function getLoad () {
     const {data}:IRequestPokemon = await axios.get(`${BASE_URL}/load`)

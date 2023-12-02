@@ -38,6 +38,7 @@ function App() {
     setRound(0)
     setBattleLogs(["Battle start"])
     setShowModal(false)
+    setEndBattle(false)
   }
 
  
