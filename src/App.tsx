@@ -20,6 +20,7 @@ function App() {
   const [pokemonModal, setPokemonModal] = React.useState<IStatus | null>({} as IStatus)
   const [endBattle, setEndBattle] = React.useState<boolean>(false)
   const [algorithm, setAlgorithm] = React.useState<string>("astar")
+  const [shouldWait, setShouldWait] = React.useState(false)
 
 
   React.useEffect(() => {
@@ -33,6 +34,7 @@ function App() {
   })
 
   function handleStopPlaying () {
+    setShouldWait(false)
     setStep("userChoice")
     setUserPokemon(null)
     setUserPokemon(null)
@@ -102,7 +104,7 @@ function App() {
   if(step === "algorithmChoice") {
     return(
       <>
-        <h1>Hey zoz I ate your mother</h1>
+        <h1>Choose the AI algorithm</h1>
         <button onClick={() => handleAlgorithm("A_STAR")}>A STAR</button>
         <button onClick={() => handleAlgorithm("BFS")}>BFS</button>
       </>
@@ -133,7 +135,9 @@ function App() {
         setPokemonModal,
         endBattle,
         setEndBattle,
-        algorithm
+        algorithm,
+        shouldWait,
+        setShouldWait
         }}>
         <PlayingBlock />
       </GameContext.Provider>

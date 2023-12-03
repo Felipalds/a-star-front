@@ -22,6 +22,8 @@ interface IGameContext {
     endBattle: boolean
     setEndBattle: Dispatch<SetStateAction<boolean>>
     algorithm : string
+    shouldWait: boolean
+    setShouldWait: Dispatch<SetStateAction<boolean>>
 }
 
 export const GameContext = React.createContext<IGameContext>({} as IGameContext)

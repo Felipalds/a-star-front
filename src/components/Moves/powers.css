@@ -29,7 +29,16 @@
 .move:hover {
     color: aliceblue;
     background-color: #242424;
-    border: 1px solid white;
     transition: .5s;
     cursor: pointer;
+}
+
+
+.disabledd { 
+    color: gray;
+}
+.disabledd:hover {
+    cursor: inherit;
+    background-color: inherit;
+    color: gray;
 }

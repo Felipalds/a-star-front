@@ -24,11 +24,18 @@ const Pokemon = () => {
     setShowModal,
     setPokemonModal,
     setEndBattle,
-    algorithm
+    algorithm,
+    shouldWait,
+    setShouldWait
   } = React.useContext(GameContext)
 
   async function handleMove(move: number) {
+    if(shouldWait) {
+      console.log("should wait")
+      return
+    }
     setRound(round+1)
+    setShouldWait(true)
 
     const powerData = {
       userPokemon,
@@ -46,7 +53,12 @@ const Pokemon = () => {
     setUserPokemon(userPokemon)
     setAiPokemon(aiPokemon)
     setBattleLogs([...data.logs])
-    if(data.ended === true) setEndBattle(true)
+    setShouldWait(false)
+
+    if(data.ended === true) {
+      setEndBattle(true)
+      setShouldWait(true)
+    }
   }
 
   const exibStatus = (whichShow: string) => {
@@ -62,7 +74,7 @@ const Pokemon = () => {
           <button onClick={() => exibStatus("user")}>Ver Status</button>
         </div>
 
-        <Moves userPokemon={userPokemon} handleMove={handleMove}/>
+        <Moves userPokemon={userPokemon} handleMove={handleMove} shouldWait={shouldWait}/>
 
         <div className='logs'>
           {battleLogs.map(bl => {
@@ -70,7 +82,7 @@ const Pokemon = () => {
           })}
         </div>
 
-        <div style={{color: "red"}}>
+        <div className='enemyPoke'>
           <p>{aiPokemon.name}</p>
           <p>Vida: {aiStatus?.health?.toFixed(1)}</p>
           <button onClick={() => exibStatus("ai")}>Ver Status</button>

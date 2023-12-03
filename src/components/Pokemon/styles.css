@@ -27,3 +27,8 @@
   margin-left:100px;
   max-width: 500px;
 }
+
+.enemyPoke { 
+  color: "red";
+  margin-right: 40px
+}
